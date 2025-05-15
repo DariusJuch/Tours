@@ -1,4 +1,4 @@
-package security;
+package techin.lt.Tour.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +21,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> foundUser = userService.findByUsername(username);
+        Optional<User> foundUser = userService.findUserByUsername(username);
 
         if (foundUser.isEmpty()) {
             throw new UsernameNotFoundException(username);
@@ -29,5 +29,4 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
         return foundUser.get();
     }
-
 }

@@ -2,11 +2,14 @@ package techin.lt.Tour.model;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "users", indexes = {
@@ -16,13 +19,15 @@ import java.util.Set;
 @AllArgsConstructor
 @Getter
 @Setter
-@ToString(exclude = {"roles", "bookings", "reviews"})
 @EqualsAndHashCode(of = "id")
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
+
+    @Column(nullable = false, unique = true, length = 100)
+    private String username;
 
     @Column(name = "email", nullable = false, unique = true, length = 255)
     private String email;
@@ -46,13 +51,8 @@ public class User implements UserDetails {
     )
     private Set<Role> roles = new HashSet<>();
 
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Booking> bookings = new HashSet<>();
-//
-//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-//    private Set<Review> reviews = new HashSet<>();
-
-    public User(String email, String password, Set<Role> roles) {
+    public User(String username, String email, String password, Set<Role> roles) {
+        this.username = username;
         this.email = email;
         this.password = password;
         this.roles = roles;
@@ -60,10 +60,7 @@ public class User implements UserDetails {
 
     @Override
     public Set<? extends GrantedAuthority> getAuthorities() {
-        return roles.stream()
-                .map(Role::getAuthority)
-                .map(SimpleGrantedAuthority::new)
-                .collect(Collectors.toSet());
+        return roles.stream().map(r -> new SimpleGrantedAuthority("ROLE_" + r.getName())).collect(Collectors.toSet());
     }
 
     @Override
