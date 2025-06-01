@@ -20,10 +20,10 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(c -> c.disable())
-                .httpBasic(Customizer.withDefaults())
-                .formLogin(Customizer.withDefaults())
+//                .httpBasic(Customizer.withDefaults())
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers(HttpMethod.POST, "api/users").permitAll()
+                        .requestMatchers(HttpMethod.POST, "api/users/register").permitAll()
+                        .requestMatchers(HttpMethod.GET, "api/users/all").permitAll()
                         .anyRequest().authenticated()
                 );
 

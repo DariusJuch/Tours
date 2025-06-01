@@ -1,5 +1,6 @@
 package techin.lt.Tour.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -36,6 +37,7 @@ public class Role implements GrantedAuthority {
     private LocalDateTime createdAt;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.EAGER)
+    @JsonBackReference
     private Set<User> users = new HashSet<>();
 
     @PrePersist

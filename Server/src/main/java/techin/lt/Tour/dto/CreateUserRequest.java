@@ -1,4 +1,4 @@
-package techin.lt.Tour.dto.user;
+package techin.lt.Tour.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -9,7 +9,7 @@ public record CreateUserRequest(
         @NotNull(message = "Username cannot be null")
         @NotBlank(message = "Username cannot be empty or consist only space")
         @Size(min = 3, max = 80, message = "Username can only contain letters and numbers")
-        @Pattern(regexp = "^[a-zA-Z0-9]+$", message = "Username can only contain letters and numbers")
+        @Pattern(regexp = "^[a-zA-Z]+$", message = "Username can only contain letters and numbers")
         String username,
 
         @NotNull(message = "Email cannot be null")

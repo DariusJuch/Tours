@@ -3,7 +3,7 @@ package techin.lt.Tour.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import techin.lt.Tour.dto.UserMapper;
-import techin.lt.Tour.dto.user.CreateUserRequest;
+import techin.lt.Tour.dto.CreateUserRequest;
 import techin.lt.Tour.exception.EmailAlreadyExistsException;
 import techin.lt.Tour.exception.UsernameAlreadyExistsException;
 import techin.lt.Tour.model.Role;

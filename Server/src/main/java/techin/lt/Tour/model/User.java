@@ -1,5 +1,6 @@
 package techin.lt.Tour.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -49,6 +50,7 @@ public class User implements UserDetails {
                     @Index(name = "idx_user_roles_role_id", columnList = "role_id")
             }
     )
+    @JsonManagedReference
     private Set<Role> roles = new HashSet<>();
 
     public User(String username, String email, String password, Set<Role> roles) {
@@ -65,7 +67,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return email;
+        return username;
     }
 
     @Override
