@@ -42,36 +42,49 @@ const Login = () => {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '2rem auto', padding: '2rem', border: '1px solid #ddd', borderRadius: '8px' }}>
-      <h2 style={{ textAlign: 'center' }}>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      <form onSubmit={handleLogin}>
-        <label>Email:</label>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <form
+        onSubmit={handleLogin}
+        className="bg-white p-8 rounded-lg shadow-md w-full max-w-md"
+      >
+        <h2 className="text-2xl font-semibold mb-6 text-center">Login</h2>
+
+        {error && (
+          <p className="mb-4 text-red-600 text-center">{error}</p>
+        )}
+
+        <label htmlFor="email" className="block mb-2 font-medium text-gray-700">
+          Email
+        </label>
         <input
+          id="email"
           type="email"
+          className="w-full mb-4 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
           value={email}
-          required
           onChange={(e) => setEmail(e.target.value)}
-          style={{ width: '100%', marginBottom: '1rem' }}
-        />
-        <label>Password:</label>
-        <input
-          type="password"
-          value={password}
           required
-          onChange={(e) => setPassword(e.target.value)}
-          style={{ width: '100%', marginBottom: '1rem' }}
+          placeholder="you@example.com"
         />
-        <div style={{ marginBottom: '1rem' }}>
-          <input
-            type="checkbox"
-            checked={rememberMe}
-            onChange={(e) => setRememberMe(e.target.checked)}
-            id="remember"
-          />
-          <label htmlFor="remember" style={{ marginLeft: '0.5rem' }}>Remember me</label>
-        </div>
-        <button type="submit" style={{ width: '100%' }}>Login</button>
+
+        <label htmlFor="password" className="block mb-2 font-medium text-gray-700">
+          Password
+        </label>
+        <input
+          id="password"
+          type="password"
+          className="w-full mb-6 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+          placeholder="••••••••"
+        />
+
+        <button
+          type="submit"
+          className="w-full bg-indigo-600 text-white py-2 rounded-md hover:bg-indigo-700 transition"
+        >
+          Sign In
+        </button>
       </form>
     </div>
   );
