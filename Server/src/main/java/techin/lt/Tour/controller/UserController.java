@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import techin.lt.Tour.dto.LoginUserRequest;
 import techin.lt.Tour.dto.UserMapper;
 import techin.lt.Tour.dto.UserResponse;
 import techin.lt.Tour.dto.CreateUserRequest;
@@ -53,5 +54,16 @@ public class UserController {
                         .toUri())
                 .body(savedUser);
     }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> loginUser(@Valid @RequestBody LoginUserRequest userRequest) {
+        boolean authenticated = userService.authenticate(userRequest.email(), userRequest.password());
+        if (authenticated) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(401).body("Invalid email or password");
+        }
+    }
+
 }
 

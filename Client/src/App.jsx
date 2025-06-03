@@ -1,14 +1,30 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+
+import { Route, Routes } from 'react-router';
+
 import "./App.css";
+import MainLayout from './components/MainLayout';
+import Home from './page/Home';
+import Login from './page/Login'
+import Register from './page/Register';
 
 function App() {
   return (
     <> 
-      <div className=" h-[50rem] flex justify-center items-center">
-        <h1 className=" flex justify-center">Hello World</h1>
-      </div>
+      <Routes>
+        <Route path="/" element={<MainLayout/>}>
+          <Route index element={<Home />}/>
+          <Route 
+            path="/login"
+            element={
+              <Login />
+            }
+          />
+          <Route
+            path='/register'
+            element={<Register/>}
+          />
+        </Route>
+      </Routes>
     </>
   );
 }
