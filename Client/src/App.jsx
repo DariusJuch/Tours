@@ -5,6 +5,7 @@ import "./App.css";
 import MainLayout from './components/MainLayout';
 import Home from './page/Home';
 import Login from './page/Login'
+import Register from './page/Register';
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
             element={
               <Login />
             }
+          />
+          <Route
+            path='/register'
+            element={<Register/>}
           />
         </Route>
       </Routes>
