@@ -49,12 +49,16 @@ export default function Register() {
 
   return (
     <div className="max-w-lg mx-auto p-8 bg-white rounded shadow-md mt-10">
-      <h1 className="text-center text-3xl font-bold mb-8">Create your account</h1>
+      <h1 className="text-center text-3xl font-bold mb-8">
+        Create your account
+      </h1>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-
         <div className="flex flex-col">
-          <label className="mb-2 font-semibold text-gray-700" htmlFor="username">
+          <label
+            className="mb-2 font-semibold text-gray-700"
+            htmlFor="username"
+          >
             Username
           </label>
           <input
@@ -70,7 +74,9 @@ export default function Register() {
             })}
           />
           {errors.username && (
-            <p className="text-red-600 text-sm mt-1">{errors.username.message}</p>
+            <p className="text-red-600 text-sm mt-1">
+              {errors.username.message}
+            </p>
           )}
         </div>
 
@@ -98,9 +104,11 @@ export default function Register() {
           )}
         </div>
 
-
         <div className="flex flex-col">
-          <label className="mb-2 font-semibold text-gray-700" htmlFor="password">
+          <label
+            className="mb-2 font-semibold text-gray-700"
+            htmlFor="password"
+          >
             Password
           </label>
           <input
@@ -111,17 +119,26 @@ export default function Register() {
             }`}
             {...register("password", {
               required: "Password is required",
-              minLength: { value: 8, message: "Minimum 8 characters" },
+              pattern: {
+                value:
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=\[\]{};:'"\\|,.<>\/?])[A-Za-z\d!@#$%^&*()_+\-=\[\]{};:'"\\|,.<>\/?]{8,255}$/,
+                message:
+                  "Password must contain at least one lowercase letter, one uppercase letter, one number, and one special character",
+              },
             })}
           />
           {errors.password && (
-            <p className="text-red-600 text-sm mt-1">{errors.password.message}</p>
+            <p className="text-red-600 text-sm mt-1">
+              {errors.password.message}
+            </p>
           )}
         </div>
 
-
         <div className="flex flex-col">
-          <label className="mb-2 font-semibold text-gray-700" htmlFor="confirmPassword">
+          <label
+            className="mb-2 font-semibold text-gray-700"
+            htmlFor="confirmPassword"
+          >
             Confirm Password
           </label>
           <input
@@ -136,7 +153,9 @@ export default function Register() {
             })}
           />
           {errors.confirmPassword && (
-            <p className="text-red-600 text-sm mt-1">{errors.confirmPassword.message}</p>
+            <p className="text-red-600 text-sm mt-1">
+              {errors.confirmPassword.message}
+            </p>
           )}
         </div>
 
