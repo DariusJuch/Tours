@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -7,6 +8,8 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const {login} = useContext(AuthContext)
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -31,6 +34,7 @@ const Login = () => {
         } else {
           localStorage.removeItem('savedEmail');
         }
+        login(email);
         navigate('/');
       } else {
         const message = await response.text();

@@ -6,6 +6,7 @@ import MainLayout from './components/MainLayout';
 import Home from './page/Home';
 import Login from './page/Login'
 import Register from './page/Register';
+import Excursions from './page/Excursions';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout/>}>
           <Route index element={<Home />}/>
+          <Route path="/excursions" element={<Excursions />}/>
           <Route 
             path="/login"
             element={
